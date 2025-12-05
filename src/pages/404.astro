@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import NotFoundContent from '../components/NotFoundContent';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="404 - Page Not Found">
-  <NotFoundContent client:load />
+  <NotFoundContent client:load base={base} />
 </Layout>
 

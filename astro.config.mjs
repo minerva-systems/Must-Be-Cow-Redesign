@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
+  base: '/Must-Be-Cow-Redesign/',
   integrations: [
     react(),
     tailwind({

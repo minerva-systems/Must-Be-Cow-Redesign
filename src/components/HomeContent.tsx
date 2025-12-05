@@ -10,10 +10,22 @@ import mbcFood3 from '../assets/MBC_Food3.jpg';
 import mbcFood4 from '../assets/MBC_Food4.jpg';
 import mbcFood5 from '../assets/MBC_Food5.jpg';
 
-export default function HomeContent() {
+interface HomeContentProps {
+  base?: string;
+}
+
+export default function HomeContent({ base = '/' }: HomeContentProps) {
   useEffect(() => {
     document.title = 'Must Be Cow - Korean BBQ & Sushi in Citrus Heights, CA | All-You-Can-Eat KBBQ';
   }, []);
+
+  const getPath = (path: string) => {
+    if (path === '/') {
+      return base === '/' ? '/' : base.endsWith('/') ? base : `${base}/`;
+    }
+    const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${basePath}${path}`;
+  };
 
   const highlights = [
     {
@@ -43,21 +55,21 @@ export default function HomeContent() {
       title: 'Korean BBQ',
       description: 'Premium beef, pork, and chicken grilled at your table',
       items: ['Beef Bulgogi', 'Spicy Pork Belly', 'Garlic Shrimp', 'Chicken Teriyaki'],
-      link: '/menu#kbbq',
+      link: getPath('/menu#kbbq'),
       image: mbcGrillFood
     },
     {
       title: 'Sushi Hand Roll',
       description: 'Fresh sushi hand rolls made to order',
       items: ['California Roll', 'Spicy Tuna', 'Salmon Avocado', 'Philadelphia'],
-      link: '/menu#sushi',
+      link: getPath('/menu#sushi'),
       image: mbcFood2
     },
     {
       title: 'Appetizers',
       description: 'Delicious starters to complement your meal',
       items: ['Fried Chicken Wings', 'Edamame', 'Seaweed Salad', 'Fried Dumplings'],
-      link: '/menu#appetizers',
+      link: getPath('/menu#appetizers'),
       image: mbcFood3
     }
   ];
@@ -86,7 +98,7 @@ export default function HomeContent() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <a
-              href="/menu"
+              href={getPath('/menu')}
               className="inline-flex items-center justify-center gap-2 bg-[#c8302e] text-white px-10 py-4 rounded-lg hover:bg-[#a52622] transition-colors text-lg"
             >
               View Our Menu
@@ -175,7 +187,7 @@ export default function HomeContent() {
           </div>
           <div className="text-center mt-12">
             <a
-              href="/menu"
+              href={getPath('/menu')}
               className="inline-flex items-center gap-2 bg-[#c8302e] text-white px-10 py-4 rounded-lg hover:bg-[#a52622] transition-colors text-lg"
             >
               View Complete Menu
@@ -354,7 +366,7 @@ export default function HomeContent() {
           </div>
           <div className="text-center mt-8">
             <a
-              href="/gallery"
+              href={getPath('/gallery')}
               className="inline-flex items-center gap-2 text-[#c8302e] hover:text-[#a52622] transition-colors"
             >
               View Full Gallery →

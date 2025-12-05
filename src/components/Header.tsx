@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import { ImageWithFallback } from './ImageWithFallback';
 import logo from '../assets/MUST_BE_COW_KBBQ_Sacramento_logo.jpg';
 
-export default function Header() {
+interface HeaderProps {
+  base?: string;
+}
+
+export default function Header({ base = '/' }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
 
@@ -24,11 +28,21 @@ export default function Header() {
     { path: '/contact', label: 'Contact' },
   ];
 
-  const isActive = (path: string) => {
+  const getPath = (path: string) => {
     if (path === '/') {
-      return currentPath === '/';
+      return base === '/' ? '/' : base.endsWith('/') ? base : `${base}/`;
     }
-    return currentPath.startsWith(path);
+    const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${basePath}${path}`;
+  };
+
+  const isActive = (path: string) => {
+    const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+    const fullPath = path === '/' ? basePath || '/' : `${basePath}${path}`;
+    if (path === '/') {
+      return currentPath === basePath || currentPath === '/';
+    }
+    return currentPath.startsWith(fullPath);
   };
 
   return (
@@ -36,7 +50,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          <a href={getPath('/')} className="flex items-center gap-3">
             <ImageWithFallback src={logo} alt="Must Be Cow" className="h-12 w-12 sm:h-16 sm:w-16 rounded" />
             <div>
               <div className="text-[#c8302e] tracking-wide">MUST BE COW</div>
@@ -49,7 +63,7 @@ export default function Header() {
             {navItems.map((item) => (
               <a
                 key={item.path}
-                href={item.path}
+                href={getPath(item.path)}
                 className={`transition-colors ${
                   isActive(item.path)
                     ? 'text-[#c8302e]'
@@ -87,7 +101,7 @@ export default function Header() {
             {navItems.map((item) => (
               <a
                 key={item.path}
-                href={item.path}
+                href={getPath(item.path)}
                 className={`block py-3 px-4 transition-colors ${
                   isActive(item.path)
                     ? 'text-[#c8302e] bg-[#332d28]'

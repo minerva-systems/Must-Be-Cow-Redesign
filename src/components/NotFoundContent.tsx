@@ -1,6 +1,17 @@
 import { Home, ArrowLeft } from 'lucide-react';
 
-export default function NotFoundContent() {
+interface NotFoundContentProps {
+  base?: string;
+}
+
+export default function NotFoundContent({ base = '/' }: NotFoundContentProps) {
+  const getPath = (path: string) => {
+    if (path === '/') {
+      return base === '/' ? '/' : base.endsWith('/') ? base : `${base}/`;
+    }
+    const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${basePath}${path}`;
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f5f1e8] to-white flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
@@ -11,7 +22,7 @@ export default function NotFoundContent() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="/"
+            href={getPath('/')}
             className="inline-flex items-center justify-center gap-2 bg-[#c8302e] text-white px-8 py-3 rounded-lg hover:bg-[#a52622] transition-colors"
           >
             <Home className="h-5 w-5" />
