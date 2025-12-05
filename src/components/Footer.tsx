@@ -1,5 +1,5 @@
 import { MapPin, Phone, Clock, Mail, Star } from 'lucide-react';
-import { Link } from 'react-router';
+import { ImageWithFallback } from './ImageWithFallback';
 import logo from '../assets/MUST_BE_COW_KBBQ_Sacramento_logo.jpg';
 
 export default function Footer() {
@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src={logo} alt="Must Be Cow" className="h-16 w-16" />
+              <ImageWithFallback src={logo} alt="Must Be Cow" className="h-16 w-16 rounded" />
               <div>
                 <div className="text-[#c8302e]">MUST BE COW</div>
                 <div className="text-sm text-[#d4a574]">Korean BBQ & Sushi</div>
@@ -61,18 +61,18 @@ export default function Footer() {
           <div>
             <h3 className="text-white mb-4">Quick Links</h3>
             <nav className="space-y-2 text-sm">
-              <Link to="/menu" className="block text-[#d4a574] hover:text-white transition-colors">
+              <a href="/menu" className="block text-[#d4a574] hover:text-white transition-colors">
                 View Menu
-              </Link>
-              <Link to="/gallery" className="block text-[#d4a574] hover:text-white transition-colors">
+              </a>
+              <a href="/gallery" className="block text-[#d4a574] hover:text-white transition-colors">
                 Photo Gallery
-              </Link>
-              <Link to="/about" className="block text-[#d4a574] hover:text-white transition-colors">
+              </a>
+              <a href="/about" className="block text-[#d4a574] hover:text-white transition-colors">
                 About Us
-              </Link>
-              <Link to="/contact" className="block text-[#d4a574] hover:text-white transition-colors">
+              </a>
+              <a href="/contact" className="block text-[#d4a574] hover:text-white transition-colors">
                 Location & Directions
-              </Link>
+              </a>
               <a
                 href="https://www.yelp.com/biz/must-be-cow-citrus-heights"
                 target="_blank"
@@ -89,13 +89,13 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-sm text-[#d4a574]">
             <p>&copy; {new Date().getFullYear()} Must Be Cow. All rights reserved.</p>
             <div className="flex gap-4">
-              <Link to="/privacy" className="hover:text-white transition-colors">
+              <a href="/privacy" className="hover:text-white transition-colors">
                 Privacy Policy
-              </Link>
+              </a>
               <span className="text-[#5a4a40]">|</span>
-              <Link to="/terms" className="hover:text-white transition-colors">
+              <a href="/terms" className="hover:text-white transition-colors">
                 Terms & Conditions
-              </Link>
+              </a>
             </div>
           </div>
         </div>

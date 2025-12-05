@@ -1,11 +1,20 @@
-import { Link, useLocation } from 'react-router';
 import { Phone, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ImageWithFallback } from './ImageWithFallback';
 import logo from '../assets/MUST_BE_COW_KBBQ_Sacramento_logo.jpg';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState('/');
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname);
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
 
   const navItems = [
     { path: '/', label: 'Home' },
@@ -17,9 +26,9 @@ export default function Header() {
 
   const isActive = (path: string) => {
     if (path === '/') {
-      return location.pathname === '/';
+      return currentPath === '/';
     }
-    return location.pathname.startsWith(path);
+    return currentPath.startsWith(path);
   };
 
   return (
@@ -27,20 +36,20 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Must Be Cow" className="h-12 w-12 sm:h-16 sm:w-16" />
+          <a href="/" className="flex items-center gap-3">
+            <ImageWithFallback src={logo} alt="Must Be Cow" className="h-12 w-12 sm:h-16 sm:w-16 rounded" />
             <div>
               <div className="text-[#c8302e] tracking-wide">MUST BE COW</div>
               <div className="text-xs text-[#d4a574] hidden sm:block">Korean BBQ & Sushi</div>
             </div>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 className={`transition-colors ${
                   isActive(item.path)
                     ? 'text-[#c8302e]'
@@ -48,7 +57,7 @@ export default function Header() {
                 }`}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -76,9 +85,9 @@ export default function Header() {
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 border-t border-[#332d28]">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 className={`block py-3 px-4 transition-colors ${
                   isActive(item.path)
                     ? 'text-[#c8302e] bg-[#332d28]'
@@ -87,7 +96,7 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
             <a
               href="tel:+19164364795"
