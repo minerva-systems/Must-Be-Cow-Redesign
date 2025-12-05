@@ -4,11 +4,8 @@ import { useEffect } from 'react';
 import mbcGrillFood from '../assets/MBC_Grill+Food.jpg';
 import mbcFood1 from '../assets/MBC_Food.jpg';
 import mbcIndoor1 from '../assets/MBC_Indoor.jpg';
-import mbcGrillFoodHero from '../assets/MBC_Grill+Food.jpg';
 import mbcFood2 from '../assets/MBC_Food2.jpg';
 import mbcFood3 from '../assets/MBC_Food3.jpg';
-import mbcFood4 from '../assets/MBC_Food4.jpg';
-import mbcFood5 from '../assets/MBC_Food5.jpg';
 
 interface HomeContentProps {
   base?: string;
@@ -16,7 +13,9 @@ interface HomeContentProps {
 
 export default function HomeContent({ base = '/' }: HomeContentProps) {
   useEffect(() => {
-    document.title = 'Must Be Cow - Korean BBQ & Sushi in Citrus Heights, CA | All-You-Can-Eat KBBQ';
+    if (typeof document !== 'undefined') {
+      document.title = 'Must Be Cow - Korean BBQ & Sushi in Citrus Heights, CA | All-You-Can-Eat KBBQ';
+    }
   }, []);
 
   const getPath = (path: string) => {
@@ -81,9 +80,11 @@ export default function HomeContent({ base = '/' }: HomeContentProps) {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <ImageWithFallback
-            src={mbcGrillFoodHero}
+            src={mbcGrillFood}
             alt="Korean BBQ Table"
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-[#1a1614]/70"></div>
         </div>
@@ -158,6 +159,8 @@ export default function HomeContent({ base = '/' }: HomeContentProps) {
                     src={category.image}
                     alt={category.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a1614] via-[#1a1614]/80 to-[#1a1614]/40"></div>
                 </div>
@@ -347,6 +350,8 @@ export default function HomeContent({ base = '/' }: HomeContentProps) {
                 src={mbcGrillFood}
                 alt="Korean BBQ grill with fresh meat cooking"
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="aspect-square rounded-xl overflow-hidden">
@@ -354,6 +359,8 @@ export default function HomeContent({ base = '/' }: HomeContentProps) {
                 src={mbcFood1}
                 alt="Fresh Korean BBQ and sushi selection"
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="aspect-square rounded-xl overflow-hidden">
@@ -361,6 +368,8 @@ export default function HomeContent({ base = '/' }: HomeContentProps) {
                 src={mbcIndoor1}
                 alt="Modern restaurant interior with grill tables"
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

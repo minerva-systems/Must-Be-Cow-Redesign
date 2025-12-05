@@ -24,11 +24,11 @@ const base = import.meta.env.BASE_URL;
   </head>
   <body>
     <div class="min-h-screen flex flex-col">
-      <Header client:load base={base} />
+      <Header client:idle base={base} />
       <main class="flex-1">
         <slot />
       </main>
-      <Footer client:load base={base} />
+      <Footer client:idle base={base} />
     </div>
   </body>
 </html>

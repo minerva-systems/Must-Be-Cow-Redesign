@@ -15,5 +15,10 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+    },
+  },
 });
 

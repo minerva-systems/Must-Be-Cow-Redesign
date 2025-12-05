@@ -12,12 +12,14 @@ export default function Header({ base = '/' }: HeaderProps) {
   const [currentPath, setCurrentPath] = useState('/');
 
   useEffect(() => {
-    setCurrentPath(window.location.pathname);
-    const handleLocationChange = () => {
+    if (typeof window !== 'undefined') {
       setCurrentPath(window.location.pathname);
-    };
-    window.addEventListener('popstate', handleLocationChange);
-    return () => window.removeEventListener('popstate', handleLocationChange);
+      const handleLocationChange = () => {
+        setCurrentPath(window.location.pathname);
+      };
+      window.addEventListener('popstate', handleLocationChange);
+      return () => window.removeEventListener('popstate', handleLocationChange);
+    }
   }, []);
 
   const navItems = [

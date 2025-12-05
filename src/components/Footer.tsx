@@ -1,4 +1,4 @@
-import { MapPin, Phone, Clock, Mail, Star } from 'lucide-react';
+import { MapPin, Phone, Clock, Star } from 'lucide-react';
 import { ImageWithFallback } from './ImageWithFallback';
 import logo from '../assets/MUST_BE_COW_KBBQ_Sacramento_logo.jpg';
 
@@ -21,7 +21,7 @@ export default function Footer({ base = '/' }: FooterProps) {
           {/* Brand */}
           <div>
             <a href={getPath('/')} className="flex items-center gap-3 mb-4">
-              <ImageWithFallback src={logo} alt="Must Be Cow" className="h-16 w-16 rounded" />
+              <ImageWithFallback src={logo} alt="Must Be Cow" className="h-16 w-16 rounded" loading="lazy" decoding="async" />
               <div>
                 <div className="text-[#c8302e]">MUST BE COW</div>
                 <div className="text-sm text-[#d4a574]">Korean BBQ & Sushi</div>

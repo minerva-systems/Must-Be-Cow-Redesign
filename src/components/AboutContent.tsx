@@ -66,6 +66,8 @@ export default function AboutContent() {
                   src="https://images.unsplash.com/photo-1708675532078-ba3995800f53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjByZXN0YXVyYW50JTIwaW50ZXJpb3J8ZW58MXx8fHwxNzY0NzUyMzE4fDA&ixlib=rb-4.1.0&q=80&w=1080"
                   alt="Must Be Cow restaurant interior"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
